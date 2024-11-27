@@ -1,0 +1,131 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    
+    // FSD Rules
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "import/no-internal-modules": [
+      "error",
+      {
+        "allow": [
+          "@/app/**",
+          "@/processes/**",
+          "@/pages/**",
+          "@/widgets/**",
+          "@/features/**",
+          "@/entities/**",
+          "@/shared/**"
+        ]
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["@/app/**/model/**"],
+            "message": "Direct model imports are not allowed. Use public API."
+          },
+          {
+            "group": ["@/processes/**/model/**"],
+            "message": "Direct model imports are not allowed. Use public API."
+          },
+          {
+            "group": ["@/pages/**/model/**"],
+            "message": "Direct model imports are not allowed. Use public API."
+          },
+          {
+            "group": ["@/widgets/**/model/**"],
+            "message": "Direct model imports are not allowed. Use public API."
+          },
+          {
+            "group": ["@/features/**/model/**"],
+            "message": "Direct model imports are not allowed. Use public API."
+          },
+          {
+            "group": ["@/entities/**/model/**"],
+            "message": "Direct model imports are not allowed. Use public API."
+          }
+        ]
+      }
+    ],
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/entities",
+            "from": "./src/(features|widgets|pages|processes|app)"
+          },
+          {
+            "target": "./src/features",
+            "from": "./src/(widgets|pages|processes|app)"
+          },
+          {
+            "target": "./src/widgets",
+            "from": "./src/(pages|processes|app)"
+          },
+          {
+            "target": "./src/pages",
+            "from": "./src/(processes|app)"
+          },
+          {
+            "target": "./src/processes",
+            "from": "./src/app"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
+}

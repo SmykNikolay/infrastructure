@@ -1,0 +1,37 @@
+{
+    "name": "infrastructure",
+    "version": "1.0.0",
+    "description": "Infrastructure configuration",
+    "main": "index.js",
+    "scripts": {
+      "prepare": "husky install",
+      "lint-staged": "lint-staged",
+      "lint": "eslint src/**/*.{ts,tsx}",
+      "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
+      "prettier:check": "prettier --check src/**/*.{ts,tsx,css,scss}",
+      "prettier:write": "prettier --write src/**/*.{ts,tsx,css,scss}",
+      "test": "jest",
+      "test:watch": "jest --watch",
+      "test:coverage": "jest --coverage",
+      "test:e2e": "cypress run",
+      "security-scan": "snyk test",
+      "dependency-check": "npm audit && snyk test",
+      "build": "webpack --mode production",
+      "build:analyze": "webpack --mode production --analyze",
+      "lighthouse": "lighthouse --output json --output-path ./lighthouse-report.json",
+      "bundle-analyzer": "webpack-bundle-analyzer stats.json",
+      "analyze": "vite build --mode analyze",
+      "health-check": "node scripts/health-check.js",
+      "error-tracking": "node scripts/error-tracking.js",
+      "deploy": "npm run build && aws s3 sync dist/ s3://bucket-name",
+      "invalidate-cdn": "aws cloudfront create-invalidation --distribution-id XXXXX --paths \"/*\"",
+      "stylelint": "stylelint src/**/*.{css,scss}",
+      "stylelint:fix": "stylelint src/**/*.{css,scss} --fix"
+      
+
+  },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "private": true
+}
